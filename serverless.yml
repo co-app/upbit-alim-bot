@@ -1,0 +1,39 @@
+service: example
+
+# Cloud Provider
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ap-northeast-2
+  lambdaHashingVersion: 20201221
+  versionFunctions: false
+
+# functions
+functions:
+  hello:
+    handler: src/functions/hello.handler
+    events: # The events that trigger this function
+      - http:
+          path: example/hello
+          method: get
+  bye:
+    handler: src/functions/bye.handler
+    events:
+      - http:
+          path: example/bye
+          method: post
+
+# Serverless plugins
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+# Resources your functions use
+resources:
+  Resources:
+    # SNS Topics
+    SNSHelloEvent:
+      Type: AWS::SNS::Topic
+      Properties:
+        DisplayName: Hello Event Topic
+        TopicName: hello-event
