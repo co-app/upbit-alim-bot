@@ -9,11 +9,11 @@
 
 ## Func
 
-- List of Coin
-- Select Favorite Coin
-- Alim Rush Up & Rush Down
-- Alim Target Price Alert (Up, Down)
-- Stat (each favorite coin)
+- [ ] List of Coin
+- [ ] Select Favorite Coin
+- [ ] Alim Rush Up & Rush Down
+- [ ] Alim Target Price Alert (Up, Down)
+- [ ] Stat (each favorite coin)
 
 ## Desc
 
