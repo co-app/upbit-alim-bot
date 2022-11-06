@@ -1,24 +1,20 @@
-## Typescript-Serverless
+# Upbit Alim Bot
 
-### Architecture
+## Tech
 
-```
-    zip -> s3 -> api gateway(http) -> lambda
-```
+- Node + Typescript
+- AWS Lambda
+- DynamoDB
+- fxts
 
-### Insatll
+## Func
 
-```
-   npm i serverless aws-lambda @types/serverless @types/aws-lambda serverless-plugin-typescript -D
-```
+- List of Coin
+- Select Favorite Coin
+- Alim Rush Up & Rush Down
+- Alim Target Price Alert (Up, Down)
+- Stat (each favorite coin)
 
-### Rule
+## Desc
 
-```
-    eslintrc.js
-    > 'import/prefer-default-export': 'off',
-```
-
-### Reference
-
-<a href="https://www.serverless.com/framework/docs/providers/aws/guide/serverless.yml"> Serverless</a>
+<a href="https://docs.upbit.com/docs"> Upbit Developer API </a>
