@@ -10,18 +10,34 @@ provider:
 
 # functions
 functions:
-  hello:
-    handler: src/functions/hello.handler
+  getCoinList:
+    handler: src/functions/getCoinList.handler
     events: # The events that trigger this function
       - http:
-          path: example/hello
+          path: coin/getCoinList
           method: get
-  bye:
-    handler: src/functions/bye.handler
+  updateFavoriteCoinList:
+    handler: src/functions/updateFavoriteCoinList.handler
     events:
       - http:
-          path: example/bye
+          path: coin/updateFavoriteCoinList
           method: post
+  statCoin:
+    handler: src/functions/statCoin.handler
+    events:
+      - http:
+          path: coin/statCoin
+          method: post
+  cronRushCoin:
+    handler: src/functions/cronRushCoin.handler
+    events:
+      - schedule: rate(1 hours)
+      - schedule: cron(0 12 * * ? *)
+  cronTargetPriceAlert:
+    handler: src/functions/cronTargetPriceAlert.handler
+    events:
+      - schedule: rate(1 hours)
+      - schedule: cron(0 12 * * ? *)
 
 # Serverless plugins
 plugins:
