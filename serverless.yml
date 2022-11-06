@@ -47,9 +47,3 @@ plugins:
 # Resources your functions use
 resources:
   Resources:
-    # SNS Topics
-    SNSHelloEvent:
-      Type: AWS::SNS::Topic
-      Properties:
-        DisplayName: Hello Event Topic
-        TopicName: hello-event
