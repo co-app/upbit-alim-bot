@@ -11,7 +11,7 @@
 
 - [ ] List of Coin (func)
   - [x] 초기 화면 -> Coin 전체 리스트 불러오기
-  - [ ] (func)Redis에 저장 후 -> Cache 형태로 꺼내쓰기 (TTL)
+  - [x] (func)Redis에 저장 후 -> Cache 형태로 꺼내쓰기 (TTL)
 - [ ] Select Favorite Coin (func)
   - 자신이 Observe 할 코인들 설정
 - [ ] Stat (each favorite coin) (func)
