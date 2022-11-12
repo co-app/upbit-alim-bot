@@ -2,28 +2,39 @@ import { map, pipe, toArray, toAsync } from '@fxts/core'
 import { Dictionary, ICoin } from '../utils/interface'
 import axios from 'axios'
 import { failed, passed } from '../utils/try'
+import { cacheRepository } from '@src/repository/cache.repository'
 
 enum UPBIT_API {
   COIN_LIST = 'https://api.upbit.com/v1/market/all',
   COIN_LIST_OF_PRICE = 'https://api.upbit.com/v1/ticker',
 }
 
+type PickCoinParams = Pick<ICoin, 'market' | 'coin_name' | 'is_warning'>
+
 class UpbitServiceManager {
+  private async getListOfCoinFromUpbit(): Promise<PickCoinParams[]> {
+    return await pipe(
+      Promise.resolve(axios.get(UPBIT_API.COIN_LIST)),
+      item => item.data as ICoin[],
+      map(coin => {
+        return {
+          market: coin.market,
+          coin_name: coin.korean_name,
+          is_warning: coin?.market_warning ?? false,
+        }
+      }),
+      toArray
+    )
+  }
+
   async getListOfCoin() {
     try {
-      const result = await pipe(
-        Promise.resolve(axios.get(UPBIT_API.COIN_LIST)),
-        item => item.data as ICoin[],
-        map(coin => {
-          return {
-            market: coin.market,
-            coin_name: coin.korean_name,
-            is_warning: coin?.market_warning ?? false,
-          }
-        }),
-        toArray
-      )
+      const coinList = await cacheRepository.getListOfCoin<PickCoinParams[]>()
+      if (coinList) return passed(coinList)
 
+      console.log('Not Exists Cache')
+      const result: PickCoinParams[] = await this.getListOfCoinFromUpbit()
+      await cacheRepository.setCache('coinList', JSON.stringify(result), 3600)
       return passed(
         result.reduce((acc, cur) => {
           acc[cur.market] = { ...cur }
