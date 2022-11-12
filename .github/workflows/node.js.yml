@@ -5,13 +5,12 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ['master']
   pull_request:
-    branches: [ "master" ]
+    branches: ['master']
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -21,15 +20,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Create Env File
+      - name: Test Of Unit
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm i
       - run: touch .env
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Test Of Unit
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm i 
-    - run: npm run test
+      - run: export NODE_ENV=test
+      - run: npm run test
