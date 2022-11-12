@@ -13,4 +13,10 @@ describe('redis test', () => {
 
     expect(true).toBe(true)
   })
+
+  // it('get Redis of coin', async () => {
+  //   const coinList = await upbitBotRedisClient.getRedis().get('coinList')
+
+  //   console.log(coinList)
+  // })
 })
