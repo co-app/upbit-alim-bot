@@ -4,7 +4,7 @@
 
 - Node + Typescript
 - AWS Lambda
-- Redis (VM)
+- Redis (Upstash)
 - fxts
 
 ## Func

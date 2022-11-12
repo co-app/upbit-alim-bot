@@ -1,18 +1,25 @@
+import axios from 'axios'
 import { upbitServiceManager } from '../services/upbit.service'
+import fs from 'fs'
+jest.mock('axios')
 
 describe('service test', () => {
+  beforeEach(async () => {
+    jest.spyOn(axios, 'get').mockImplementation(async () => {
+      return {
+        data: JSON.parse(fs.readFileSync('src/test/mockData/coin.json', 'utf-8')),
+      }
+    })
+  })
+
   it('upbit coin list dict ', async () => {
     const t = await upbitServiceManager.getListOfCoin()
-
-    console.log(t)
-    expect(true).toBe(true)
+    expect(t._tag).toBe('pass')
   })
 
   it('upbit coin list price', async () => {
     const t = await upbitServiceManager.getListOfCoinPrice(['KRW-BTC', 'BTC-ETH'])
-
-    console.log(t)
-    expect(true).toBe(true)
+    expect(t._tag).toBe('pass')
   })
 
   it('merge coinlist', async () => {
@@ -23,7 +30,7 @@ describe('service test', () => {
       upbitServiceManager.getListOfCoinPrice(favorCoinList),
     ])
 
-    const mergeCoinList = upbitServiceManager.mergeCoinLists(coinList.result as {}, coinListOfPrice.result as [])
-    console.log(mergeCoinList)
+    expect(coinList._tag).toBe('pass')
+    expect(coinListOfPrice).toBe('pass')
   })
 })

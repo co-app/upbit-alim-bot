@@ -1,7 +1,7 @@
-import { flat, map, peek, pipe, toArray, toAsync } from '@fxts/core'
+import { map, pipe, toArray, toAsync } from '@fxts/core'
 import { Dictionary, ICoin } from '../utils/interface'
 import axios from 'axios'
-import { failed, isPass, passed } from '../utils/try'
+import { failed, passed } from '../utils/try'
 
 enum UPBIT_API {
   COIN_LIST = 'https://api.upbit.com/v1/market/all',
