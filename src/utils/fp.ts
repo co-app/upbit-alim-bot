@@ -1,7 +1,7 @@
 /**
  * @desc needs a parameter
  */
-export const go = <T, K>(params: T, ...fns): T | K => {
+export const go = <T>(params: T, ...fns): T => {
   let result: T = params
   for (const fn of fns) result = fn(result)
   return result
