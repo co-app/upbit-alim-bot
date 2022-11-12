@@ -31,6 +31,6 @@ describe('service test', () => {
     ])
 
     expect(coinList._tag).toBe('pass')
-    expect(coinListOfPrice).toBe('pass')
+    expect(coinListOfPrice._tag).toBe('pass')
   })
 })
